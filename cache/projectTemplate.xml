@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2015.2 (Build 540)" ts="2015-04-28 19:50:48">
+<Export generator="Cache" version="25" zv="Cache for UNIX (SUSE Linux Enterprise Server for x86-64) 2016.2 (Build 577U)" ts="2016-04-13 12:26:45">
 <Class name="ClassExplorer.ClassView">
 <Description>
 Cache Class Explorer vX.X.X/*build.replace:pkg.version*/
@@ -417,7 +417,7 @@ Returns structured package data</Description>
 </Class>
 
 
-<Project name="ClassExplorer" LastModified="2015-05-24 18:14:48.579613">
+<Project name="ClassExplorer" LastModified="2016-04-13 08:06:28.625227">
   <Items>
     <ProjectItem name="ClassExplorer.ClassView" type="CLS"></ProjectItem>
     <ProjectItem name="ClassExplorer.Router" type="CLS"></ProjectItem>
@@ -431,7 +431,7 @@ Returns structured package data</Description>
 <Description>
 REST interface for ClassExplorer</Description>
 <Super>%CSP.REST</Super>
-<TimeChanged>64010,52108.241141</TimeChanged>
+<TimeChanged>64021,43403.26812</TimeChanged>
 <TimeCreated>63648,30450.187229</TimeCreated>
 
 <XData name="UrlMap">
@@ -459,8 +459,21 @@ Method returns whole class tree visible in the current namespace.</Description>
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-    do ##class(ClassExplorer.ClassView).getClassTree(%request.Get("namespace")).%ToJSON(, "o")
+    do ..ReturnJSON(##class(ClassExplorer.ClassView).getClassTree(%request.Get("namespace")))
     return $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="ReturnJSON">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>data:%ZEN.proxyObject</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    if ($data(%request)) {
+      Set %response.CharSet     = ##class(%SYS.NLS.Table).GetCSPTable()
+      Set %response.ContentType = "application/json"
+    }
+    return data.%ToJSON(, "o")
 ]]></Implementation>
 </Method>
 
@@ -472,7 +485,7 @@ Returns classTree by given class name</Description>
 <Implementation><![CDATA[
     set classList = %request.Get("list")
     set classData = ##class(ClassView).getArbitraryView(classList, %request.Get("namespace"), %request.Get("level"))
-    do classData.%ToJSON(, "o")
+    do ..ReturnJSON(classData)
     return $$$OK
 ]]></Implementation>
 </Method>
@@ -512,7 +525,7 @@ Returns all package class trees by given package name</Description>
 <Implementation><![CDATA[
     set packageName = %request.Get("name")
     set classData = ##class(ClassView).getPackageView(packageName, %request.Get("namespace"))
-    do classData.%ToJSON(, "o")
+    do ..ReturnJSON(classData)
     return $$$OK
 ]]></Implementation>
 </Method>
@@ -523,7 +536,7 @@ Return the list of all namespaces</Description>
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-    do ##class(ClassExplorer.ClassView).getAllNamespacesList().%ToJSON(, "o")
+    do ..ReturnJSON(##class(ClassExplorer.ClassView).getAllNamespacesList())
     return $$$OK
 ]]></Implementation>
 </Method>
@@ -537,7 +550,7 @@ Returns method description and code</Description>
     set className = %request.Get("className")
     set methodName = %request.Get("methodName")
     set methodData = ##class(ClassView).getMethod(className, methodName, %request.Get("namespace"))
-    do methodData.%ToJSON(, "o")
+    do ..ReturnJSON(methodData)
     return $$$OK
 ]]></Implementation>
 </Method>

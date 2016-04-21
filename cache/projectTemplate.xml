@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Export generator="Cache" version="25" zv="Cache for UNIX (SUSE Linux Enterprise Server for x86-64) 2016.2 (Build 577U)" ts="2016-04-21 13:00:22">
+<Export generator="Cache" version="25" zv="Cache for UNIX (SUSE Linux Enterprise Server for x86-64) 2016.2 (Build 577U)" ts="2016-04-21 13:34:06">
 <Class name="ClassExplorer.ClassView">
 <Description>
 Cache Class Explorer vX.X.X/*build.replace:pkg.version*/
 Class contains methods that return structured classes/packages data.</Description>
-<TimeChanged>64029,46769.8869</TimeChanged>
+<TimeChanged>64029,48779.308697</TimeChanged>
 <TimeCreated>63653,67019.989197</TimeCreated>
 
 <Method name="getAllNamespacesList">
@@ -415,6 +415,35 @@ Returns structured package data</Description>
 ]]></Implementation>
 </Method>
 
+<Method name="GetOrigins">
+<Description>
+Get Origin from %request object </Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+    set url = %request.GetCgiEnv("HTTP_REFERER")
+    return $p(url,"/",1,3) // get http(s)://origin.com:port
+]]></Implementation>
+</Method>
+
+<Method name="AssumeJSON">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    if ($data(%request)) {
+        // CORS support
+        do %response.SetHeader("Access-Control-Allow-Origin", ..GetOrigins())
+        do %response.SetHeader("Access-Control-Allow-Credentials", "true")
+        do %response.SetHeader("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS")
+        do %response.SetHeader("Access-Control-Max-Age", "10000")
+        do %response.SetHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Accept-Language, X-Requested-With") 
+    
+        set %response.CharSet     = ##class(%SYS.NLS.Table).GetCSPTable()
+        set %response.ContentType = "application/json"
+    }
+]]></Implementation>
+</Method>
+
 <Method name="getClassInstances">
 <ClassMethod>1</ClassMethod>
 <FormalSpec>className:%String,namespace:%String="",pageNo:%Integer=1,pageSize:%Integer=-1,sortByField:%String="",lookup:%String=""</FormalSpec>
@@ -427,7 +456,8 @@ Returns structured package data</Description>
     // simplest case - infinite output
     if pageSize < 0 {
         //#dim rs As %Library.ResultSet = ##class(%ResultSet).%New("%DynamicQuey:SQL")
-        do ##class(%ZEN.Auxiliary.jsonSQLProvider).%WriteJSONFromSQL(,"select top 10 id,Name from Sample.Person")
+        do ..AssumeJSON()
+        do ##class(%ZEN.Auxiliary.jsonSQLProvider).%WriteJSONFromSQL(,"select id,Name from Sample.Person")
         return ""
     }
 ]]></Implementation>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Export generator="Cache" version="25" zv="Cache for UNIX (SUSE Linux Enterprise Server for x86-64) 2016.2 (Build 577U)" ts="2016-04-21 13:34:06">
+<Export generator="Cache" version="25" zv="Cache for UNIX (SUSE Linux Enterprise Server for x86-64) 2016.2 (Build 577U)" ts="2016-04-28 09:00:20">
 <Class name="ClassExplorer.ClassView">
 <Description>
 Cache Class Explorer vX.X.X/*build.replace:pkg.version*/
 Class contains methods that return structured classes/packages data.</Description>
-<TimeChanged>64029,48779.308697</TimeChanged>
+<TimeChanged>64036,32352.502873</TimeChanged>
 <TimeCreated>63653,67019.989197</TimeCreated>
 
 <Method name="getAllNamespacesList">
@@ -457,9 +457,39 @@ Get Origin from %request object </Description>
     if pageSize < 0 {
         //#dim rs As %Library.ResultSet = ##class(%ResultSet).%New("%DynamicQuey:SQL")
         do ..AssumeJSON()
-        do ##class(%ZEN.Auxiliary.jsonSQLProvider).%WriteJSONFromSQL(,"select id,Name from Sample.Person")
+        do ##class(%ZEN.Auxiliary.jsonSQLProvider).%WriteJSONFromSQL(,"select *,"_sortByField_" from "_className)
         return ""
     }
+]]></Implementation>
+</Method>
+
+<Method name="getInstance">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%String,className:%String="",namespace:%String=""</FormalSpec>
+<ReturnType>%ZEN.proxyObject</ReturnType>
+<Implementation><![CDATA[
+    new $namespace
+    set:namespace'="" $namespace = namespace
+
+    #dim object As %Persistent = $classmethod(className, "%OpenId", id)
+    //zw object
+    do ..AssumeJSON()
+    do ##class(%ZEN.Auxiliary.jsonProvider).%ObjectToJSON(object,.visited,2)
+    return ""
+]]></Implementation>
+</Method>
+
+<Method name="getTitleMap">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>namespace:%String=""</FormalSpec>
+<ReturnType>%ZEN.proxyObject</ReturnType>
+<Implementation><![CDATA[
+    new $namespace
+    set:namespace'="" $namespace = namespace
+
+    #dim object As %ZEN.proxyObject = ##class(%ZEN.proxyObject).%New()
+    set object."Aviation.Event" = "EventId"
+    return object
 ]]></Implementation>
 </Method>
 </Class>
@@ -479,7 +509,7 @@ Get Origin from %request object </Description>
 <Description>
 REST interface for ClassExplorer</Description>
 <Super>%CSP.REST</Super>
-<TimeChanged>64029,46726.983352</TimeChanged>
+<TimeChanged>64036,31492.713912</TimeChanged>
 <TimeCreated>63648,30450.187229</TimeCreated>
 
 <XData name="UrlMap">
@@ -500,6 +530,7 @@ REST interface for ClassExplorer</Description>
    <Route Url="/details/GetClassInstances/:ClassName" Method="GET" Call="GetClassInstances"/>
    <Route Url="/details/GetInstance/:Id" Method="GET" Call="GetInstance"/>
    <Route Url="/details/GetLinkValues" Method="GET" Call="GetLinkValues"/>
+   <Route Url="/details/GetTitleMap" Method="GET" Call="GetTitleMap"/>
 </Routes>
 ]]></Data>
 </XData>
@@ -579,6 +610,35 @@ Returns classTree by given class name</Description>
         set lookup      = %request.Get("lookup")
     }
     set classData = ##class(ClassExplorer.ClassView).getClassInstances(className, namespace, pageNo, pageSize, sortByField, lookup)
+    if $isobject(classData) do ..ReturnJSON(classData)
+    return $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="GetInstance">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%String,className:%String="",namespace:%String=""</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    if ($data(%request)) {
+        set className   = %request.Get("className")
+        set namespace   = %request.Get("namespace")
+    }
+    set classData = ##class(ClassExplorer.ClassView).getInstance(id, className, namespace)
+    if $isobject(classData) do ..ReturnJSON(classData)
+    return $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="GetTitleMap">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>namespace:%String=""</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    if ($data(%request)) {
+        set namespace   = %request.Get("namespace")
+    }
+    set classData = ##class(ClassExplorer.ClassView).getTitleMap(namespace)
     if $isobject(classData) do ..ReturnJSON(classData)
     return $$$OK
 ]]></Implementation>

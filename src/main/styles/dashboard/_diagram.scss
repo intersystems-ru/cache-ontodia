@@ -1,0 +1,52 @@
+@import "../base";
+
+.diagramElement {
+  margin: 5px;
+  &:hover .diagramElement__buttons {
+    display: block;
+  }
+  h4 {
+    margin: 0;
+    text-align: center;
+    word-wrap: break-word;
+  }
+  
+  &__buttons {
+    display: none;
+    float: right;
+    margin-left: -100px;
+  }
+  
+  &__card {
+    max-width: 300px;
+    margin-bottom: 0;
+    @include display-flex;
+    @include flex-direction(column);
+    align-items: center;
+  }
+  
+  &__imageContainer {
+    height: 140px;
+    @include display-flex;
+    @include flex-direction(column);
+    justify-content: center;
+    align-items: center;
+    > img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+  
+  &__caption {
+    width: 100%;
+  }
+  
+  &__ownerLabel {
+    color: gray;
+    text-align: center;
+  }
+  
+  &__caption-highlight {
+    color: #ff6707;
+  }
+}

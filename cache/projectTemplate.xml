@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Export generator="Cache" version="25" zv="Cache for UNIX (SUSE Linux Enterprise Server for x86-64) 2016.2 (Build 577U)" ts="2016-04-28 09:00:20">
+<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2015.2 (Build 540)" ts="2015-04-28 19:50:48">
 <Class name="ClassExplorer.ClassView">
 <Description>
-Cache Class Explorer vX.X.X/*build.replace:pkg.version*/
+Cache Class Explorer 1.16.3
 Class contains methods that return structured classes/packages data.</Description>
-<TimeChanged>64036,32352.502873</TimeChanged>
+<TimeChanged>64010,55351.57242</TimeChanged>
 <TimeCreated>63653,67019.989197</TimeCreated>
 
 <Method name="getAllNamespacesList">
@@ -252,15 +252,15 @@ Returns if <var>packageName</var> is in <var>basePackageName</var>.]]></Descript
 <Private>1</Private>
 <ReturnType>%Boolean</ReturnType>
 <Implementation><![CDATA[
-    set pack = $PIECE(packageName, ".", 1)
-    set list = $LISTFROMSTRING(basePackageNames, ",")
-    set OK = 0
-    for i=1:1:$LISTLENGTH(list) {
-        if ($LISTGET(list, i) = pack) {
-            set OK = 1
-            quit
-        }
-    }
+	set pack = $PIECE(packageName, ".", 1)
+	set list = $LISTFROMSTRING(basePackageNames, ",")
+	set OK = 0
+	for i=1:1:$LISTLENGTH(list) {
+		if ($LISTGET(list, i) = pack) {
+			set OK = 1
+			quit
+		}
+	}
     quit OK
 ]]></Implementation>
 </Method>
@@ -391,24 +391,24 @@ Returns structured package data</Description>
 <ClassMethod>1</ClassMethod>
 <FormalSpec>classList:%String,namespace:%String,level:%String=""</FormalSpec>
 <Implementation><![CDATA[
-    set baseNamespace = $namespace
+	set baseNamespace = $namespace
     zn:$GET(namespace)'="" namespace
     set list = $LISTFROMSTRING(classList, ",")
 
     set basePackages = $LB()
     set count = 0
     for i=1:1:$LISTLENGTH(list) {
-        set packName = $PIECE($LISTGET(list, i), ".", 1)
-        if ($LISTFIND(basePackages, packName) = 0) {
-            set $LIST(basePackages, count + 1) = packName
-            set count = count + 1
-        }
+	    set packName = $PIECE($LISTGET(list, i), ".", 1)
+	    if ($LISTFIND(basePackages, packName) = 0) {
+		    set $LIST(basePackages, count + 1) = packName
+		    set count = count + 1
+	    }
     }
 
     set oData = ..getBaseOData($LISTTOSTRING(basePackages, ",", 1), baseNamespace, "ARBITRARY:"_classList)
 
     for i=1:1:$LISTLENGTH(list) {
-        do ..fillClassData(oData, $LISTGET(list, i), level)
+		do ..fillClassData(oData, $LISTGET(list, i), level)
     }
 
     quit oData
@@ -417,7 +417,7 @@ Returns structured package data</Description>
 
 <Method name="GetOrigins">
 <Description>
-Get Origin from %request object </Description>
+Get Origin from %request object</Description>
 <ClassMethod>1</ClassMethod>
 <ReturnType>%String</ReturnType>
 <Implementation><![CDATA[
@@ -446,8 +446,8 @@ Get Origin from %request object </Description>
 
 <Method name="getClassInstances">
 <ClassMethod>1</ClassMethod>
-<FormalSpec>className:%String,namespace:%String="",pageNo:%Integer=1,pageSize:%Integer=-1,sortByField:%String="",lookup:%String=""</FormalSpec>
 <ReturnType>%ZEN.proxyObject</ReturnType>
+<FormalSpec>className:%String, namespace:%String = "", pageNo:%Integer = 1, pageSize:%Integer = -1, sortByField:%String = "", lookup:%String = ""</FormalSpec>
 <Implementation><![CDATA[
     new $namespace
     set:namespace'="" $namespace = namespace
@@ -465,8 +465,8 @@ Get Origin from %request object </Description>
 
 <Method name="getInstance">
 <ClassMethod>1</ClassMethod>
-<FormalSpec>id:%String,className:%String="",namespace:%String=""</FormalSpec>
 <ReturnType>%ZEN.proxyObject</ReturnType>
+<FormalSpec>id:%String, className:%String = "", namespace:%String = ""</FormalSpec>
 <Implementation><![CDATA[
     new $namespace
     set:namespace'="" $namespace = namespace
@@ -481,21 +481,28 @@ Get Origin from %request object </Description>
 
 <Method name="getTitleMap">
 <ClassMethod>1</ClassMethod>
-<FormalSpec>namespace:%String=""</FormalSpec>
 <ReturnType>%ZEN.proxyObject</ReturnType>
+<FormalSpec>namespace:%String = ""</FormalSpec>
 <Implementation><![CDATA[
-    new $namespace
+new $namespace
     set:namespace'="" $namespace = namespace
 
     #dim object As %ZEN.proxyObject = ##class(%ZEN.proxyObject).%New()
-    set object."Aviation.Event" = "EventId"
+    set object."Aviation.Aircraft"   = "AircraftModel"
+    set object."Aviation.Event"      = "EventId"
+    set object."Cinema.Film"         = "Title"
+    set object."Cinema.FilmCategory" = "CategoryName"
+    set object."Cinema.Review"       = "ReviewText"
+    set object."Cinema.Theater"      = "TheaterName"
+    //do ##class(%ZEN.Auxiliary.jsonProvider).%ObjectToJSON(object,.visited,2)
     return object
 ]]></Implementation>
 </Method>
+
 </Class>
 
 
-<Project name="ClassExplorer" LastModified="2016-04-13 08:06:28.625227">
+<Project name="Ontodia-cache" LastModified="2016-07-25 12:59:47.777777">
   <Items>
     <ProjectItem name="ClassExplorer.ClassView" type="CLS"></ProjectItem>
     <ProjectItem name="ClassExplorer.Router" type="CLS"></ProjectItem>
@@ -509,7 +516,7 @@ Get Origin from %request object </Description>
 <Description>
 REST interface for ClassExplorer</Description>
 <Super>%CSP.REST</Super>
-<TimeChanged>64036,31492.713912</TimeChanged>
+<TimeChanged>64010,52108.241141</TimeChanged>
 <TimeCreated>63648,30450.187229</TimeCreated>
 
 <XData name="UrlMap">
@@ -548,7 +555,7 @@ Method returns whole class tree visible in the current namespace.</Description>
 
 <Method name="GetOrigins">
 <Description>
-Get Origin from %request object </Description>
+Get Origin from %request object.</Description>
 <ClassMethod>1</ClassMethod>
 <ReturnType>%String</ReturnType>
 <Implementation><![CDATA[
@@ -558,6 +565,7 @@ Get Origin from %request object </Description>
 </Method>
 
 <Method name="ReturnJSON">
+<Description>.</Description>
 <ClassMethod>1</ClassMethod>
 <FormalSpec>data:%ZEN.proxyObject</FormalSpec>
 <ReturnType>%Status</ReturnType>
@@ -590,19 +598,13 @@ Returns classTree by given class name</Description>
 ]]></Implementation>
 </Method>
 
-<UDLText name="T">
-<Content><![CDATA[
-// ONTODIA EXTENSIONS+
-
-]]></Content>
-</UDLText>
-
 <Method name="GetClassInstances">
+<Description>.</Description>
 <ClassMethod>1</ClassMethod>
-<FormalSpec>className:%String,namespace:%String="",pageNo:%Integer=1,pageSize:%Integer=-1,sortByField:%String="",lookup:%String=""</FormalSpec>
+<FormalSpec>className:%String, namespace:%String = "", pageNo:%Integer = 1, pageSize:%Integer = -1, sortByField:%String = "", lookup:%String = ""</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-    if ($data(%request)) {
+       if ($data(%request)) {
         set namespace   = %request.Get("namespace")
         set pageNo      = %request.Get("pageNo", 1)
         set pageSize    = %request.Get("pageSize", -1)
@@ -616,8 +618,9 @@ Returns classTree by given class name</Description>
 </Method>
 
 <Method name="GetInstance">
+<Description>.</Description>
 <ClassMethod>1</ClassMethod>
-<FormalSpec>id:%String,className:%String="",namespace:%String=""</FormalSpec>
+<FormalSpec>id:%String, className:%String = "", namespace:%String = ""</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
     if ($data(%request)) {
@@ -631,8 +634,9 @@ Returns classTree by given class name</Description>
 </Method>
 
 <Method name="GetTitleMap">
+<Description>.</Description>
 <ClassMethod>1</ClassMethod>
-<FormalSpec>namespace:%String=""</FormalSpec>
+<FormalSpec>namespace:%String = ""</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
     if ($data(%request)) {
@@ -643,13 +647,6 @@ Returns classTree by given class name</Description>
     return $$$OK
 ]]></Implementation>
 </Method>
-
-<UDLText name="T">
-<Content><![CDATA[
-// ONTODIA EXTENSIONS-
-
-]]></Content>
-</UDLText>
 
 <Method name="SaveView">
 <Description>
@@ -686,7 +683,7 @@ Returns all package class trees by given package name</Description>
 <Implementation><![CDATA[
     set packageName = %request.Get("name")
     set classData = ##class(ClassView).getPackageView(packageName, %request.Get("namespace"))
-    do ..ReturnJSON(classData)
+    do classData.%ToJSON(, "o")
     return $$$OK
 ]]></Implementation>
 </Method>
@@ -697,7 +694,7 @@ Return the list of all namespaces</Description>
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-    do ..ReturnJSON(##class(ClassExplorer.ClassView).getAllNamespacesList())
+    do ##class(ClassExplorer.ClassView).getAllNamespacesList().%ToJSON(, "o")
     return $$$OK
 ]]></Implementation>
 </Method>
@@ -711,7 +708,7 @@ Returns method description and code</Description>
     set className = %request.Get("className")
     set methodName = %request.Get("methodName")
     set methodData = ##class(ClassView).getMethod(className, methodName, %request.Get("namespace"))
-    do ..ReturnJSON(methodData)
+    do methodData.%ToJSON(, "o")
     return $$$OK
 ]]></Implementation>
 </Method>
@@ -792,7 +789,7 @@ Issue an "304 Not Modified" status</Description>
 
 <Class name="ClassExplorer.StaticContent">
 <Description>
-Cache Class Explorer vX.X.X/*build.replace:pkg.version*/ static content generator.
+Cache Class Explorer 1.16.3 static content generator.
 Class contains methods that return JS/CSS/HTML data for single page application.</Description>
 <TimeChanged>63670,71368.846177</TimeChanged>
 <TimeCreated>63663,71456.865723</TimeCreated>
@@ -814,7 +811,14 @@ Write the contents of xData tag</Description>
 <XData name="HTML">
 <Data><![CDATA[
 <data><![CDATA[
-{{replace:html}}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    
+</head>
+<body>
+</body>
+</html>
 ]]]]><![CDATA[></data>
 ]]></Data>
 </XData>
@@ -822,7 +826,6 @@ Write the contents of xData tag</Description>
 <XData name="CSS">
 <Data><![CDATA[
 <data><![CDATA[
-{{replace:css}}
 ]]]]><![CDATA[></data>
 ]]></Data>
 </XData>
@@ -830,7 +833,7 @@ Write the contents of xData tag</Description>
 <XData name="JS">
 <Data><![CDATA[
 <data><![CDATA[
-{{replace:js}}
+
 ]]]]><![CDATA[></data>
 ]]></Data>
 </XData>
@@ -862,7 +865,7 @@ This method is invoked when a class is compiled.</Description>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
 	set properties("NameSpace") = $Namespace
-    set properties("Description") = "A WEB application for Cache UML Explorer."
+    set properties("Description") = "A WEB application for Ontodia-cache viewer."
     set properties("IsNameSpaceDefault") = $$$YES
     set properties("DispatchClass") = ..#DispatchClass
 	

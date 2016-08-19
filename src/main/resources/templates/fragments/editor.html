@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<div th:fragment="share-popup" id="sharePopup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="sharePopupLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="sharePopupLabel">Share Diagram By Link</h4>
+            </div>
+            <div id="shareSuccessBody" class="modal-body">
+                <input type="text" class="form-control" id="shareLink" />
+            </div>
+            <div id="shareFailureBody" class="modal-body" style="display: none">
+                <div class="alert alert-danger" role="alert">
+                    Unknown error occurred while trying to share diagram.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="save-and-share-popup" class="modal fade" id="saveAndShareDialog" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="warningShareDiagramLabel">Share diagram</h4>
+            </div>
+            <div class="modal-body">
+                To share this diagram it needs to be saved first. Save diagram now?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary saveAndShareButton" data-dismiss="modal">Save and share</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="confirm-copy-popup" class="modal fade" id="confirmCopyDialog"
+     data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="confirmModalLabel">Copy shared diagram</h4>
+            </div>
+            <div class="modal-body">
+                This diagram "<span class=".copyObjectTitle"></span>" is shared for you as a viewer only and is read only. Create a copy of a diagram, so you can save it?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="confirmCopyButton btn btn-primary">Copy</button>
+                <button type="button" class="cancelButton btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="sign-in-to-continue-popup" class="modal fade" id="sinInToContinueDialog"
+     data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="signInToContinueModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="signInToContinueModalLabel">Authentication required</h4>
+            </div>
+            <div class="modal-body">
+                Sign in to proceed
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary signInButton">Sign In</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

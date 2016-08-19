@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <!-- disable pinch-to-zoom -->
+    <meta name="viewport" content="user-scalable=no" />
+    <script th:replace="fragments/header :: newrelic-browser"></script>
+    <title>OntoDia - OWL Diagramming toolkit</title>
+    <link rel="stylesheet" href="bootstrap/cerulean-theme/bootstrap.min.css"/>
+    <link rel="stylesheet" href="js/rappid/rappid.css"/>
+    <link rel="stylesheet" href="css/diagram.css"/>
+</head>
+<body class="claro">
+    <!-- webpack bundle -->
+    <script src="webpack/editor-bundle.js"></script>
+    <!-- bootstrap MUST be loaded after webpack bundle to ensure that jQuery is exposed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/jquery/jquery.cookie.js"></script>
+
+    <div th:replace="dashboard/share :: markup"></div>
+    <div th:replace="fragments/editor :: save-and-share-popup"></div>
+    <div th:replace="fragments/editor :: confirm-copy-popup"></div>
+    <div th:replace="fragments/editor :: sign-in-to-continue-popup"></div>
+    <div th:replace="fragments/common :: reconnect-popup"></div>
+
+    <div class="ontodia-editor-page">
+        <div class="ontodia-header">
+            <div class="ontodia-title">
+                <a th:href="@{/dashboard}"><img src="images/ontodia_headlogo.png" /></a>
+                <div>
+                    <div class="dataSourceTitleLabel" style="display: none">Using data source: <span class="dataSourceTitle"></span></div>
+                    <input type="text" class="titleTextBox" placeholder="Type diagram title here"
+                           data-position="bottom" data-step="5"
+                           data-intro="&lt;h4&gt;Diagram Title&lt;/h4&gt;
+                                       &lt;p&gt;When you open a data source Ontodia creates a new ‘Untitled’ diagram.
+                                       But we think it’s a good idea to give your diagrams good names.&lt;/p&gt;
+                                       &lt;p&gt;You can change the name at any time by erasing and typing in the new title.
+                                       And don’t forget to save this change!&lt;/p&gt;"/>
+                </div>
+                <button th:replace="fragments/common :: reconnect-button"></button>
+            </div>
+
+        </div>
+        <div id="params" th:attr="data-accessToken=${accessToken},
+        data-sharedKey=${sharedKey},
+        data-diagramId=${diagramId},
+        data-appId=${appId},
+        data-dataSourceId=${dataSourceId},
+        data-widgetId=${widgetId},
+        data-isAllowedToSave=${isAllowedToSave}"></div>
+        <div id="ontodia"></div>
+    </div>
+
+    <script th:replace="fragments/footer :: google-analytics"></script>
+</body>
+</html>

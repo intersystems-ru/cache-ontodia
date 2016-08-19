@@ -1,0 +1,88 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: fixed;
+}
+#reconnectButton {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    padding: 3px 5px;
+}
+.list-group-item {
+    overflow-wrap: break-word;
+}
+/* Prevent the text contents of draggable elements from being selectable. */
+[draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Required to make elements draggable in old WebKit */
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+}
+.popover {
+    width: 300px;
+    /*height:250px;*/
+}
+@media print {
+    body:before {
+        content: 'OntoDia - OWL diagramming tool';
+        font-size: 12px;
+        z-index: 100000;
+    }
+}
+.ontodia-editor-page {
+    display: flex;
+    flex-direction: column;
+    display: -webkit-flex; /* safari 8 */
+    -webkit-flex-direction: column; /* safari 8 */
+    height: 100%;
+}
+.ontodia-header {
+    display: flex;
+    flex-direction: column;
+    display: -webkit-flex; /* safari 8 */
+    -webkit-flex-direction: column; /* safari 8 */
+
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+.ontodia-title {
+    display: flex;
+    display: -webkit-flex; /* safari 8 */
+    height: 55px;
+}
+.ontodia-title img {
+    margin: 5px 15px 5px 20px;
+}
+.ontodia-title > div {
+    display: flex;
+    flex-direction: column;
+    display: -webkit-flex; /* safari 8 */
+    -webkit-flex-direction: column; /* safari 8 */
+    justify-content: center;
+    width: 50%;
+}
+.ontodia-title .dataSourceTitleLabel {
+    font-size: 10px;
+    font-style: italic;
+}
+.ontodia-title input.titleTextBox {
+    font-size: 18px;
+    margin-left: -2px;
+    height: 28px;
+    border-color: transparent;
+}
+
+#saveToSelf span {
+    color: #0C8BFF;
+}
+#resetDiagram span {
+    color: #E2A000;
+}

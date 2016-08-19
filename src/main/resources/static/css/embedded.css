@@ -1,0 +1,30 @@
+.ontodia-embedded .ontodia-header {
+    border-bottom: 1px dashed #E2E2E2;
+}
+.ontodia-embedded .ontodia-toolbar {
+    background: white;
+}
+.ontodia-embedded #saveBtn span {
+    color: #0C8BFF;
+}
+.ontodia-embedded #editAtMainSite img {
+    height: 1.3em;
+}
+.ontodia-embedded .ontodia-toolbar > .btn-group {
+    margin-left: 10px;
+}
+.ontodia-embedded #reconnectButton {
+    position: initial;
+    top: initial;
+    right: initial;
+    margin-right: 10px;
+}
+/* diagram editor tweaks */
+.ontodia-embedded .ontodia-main-panel .paper-area {
+    background-image: none;
+    background-color: white;
+    overflow: hidden;
+}
+.ontodia-embedded .paper-area .paper {
+    border: none;
+}

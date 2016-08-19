@@ -1,0 +1,17 @@
+{
+  "name": "ontodia-core",
+  "version": false,
+  "ambientDependencies": {
+    "backbone": "github:DefinitelyTyped/DefinitelyTyped/backbone/backbone.d.ts#78ba6e41543e5ababbd1dda19797601be3c1f304",
+    "backbone-global": "github:DefinitelyTyped/DefinitelyTyped/backbone/backbone-global.d.ts#78ba6e41543e5ababbd1dda19797601be3c1f304",
+    "joint": "registry:dt/jointjs#0.9.7+20160707180857",
+    "d3": "github:DefinitelyTyped/DefinitelyTyped/d3/d3.d.ts#fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38",
+    "es6-promise": "registry:dt/es6-promise#0.0.0+20160221190517",
+    "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#1da639a106527e0c4010b354a1efe52a3059a291",
+    "jstree": "github:DefinitelyTyped/DefinitelyTyped/jstree/jstree.d.ts#1da639a106527e0c4010b354a1efe52a3059a291",
+    "react": "registry:dt/react#0.14.0+20160423065914",
+    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
+    "sockjs": "github:DefinitelyTyped/DefinitelyTyped/sockjs/sockjs.d.ts#78ba6e41543e5ababbd1dda19797601be3c1f304",
+    "underscore": "github:DefinitelyTyped/DefinitelyTyped/underscore/underscore.d.ts#78ba6e41543e5ababbd1dda19797601be3c1f304"
+  }
+}

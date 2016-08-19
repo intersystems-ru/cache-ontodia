@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<div th:fragment="reconnect-popup" id="reconnectPopup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="reconnectPopupLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="reconnectPopupLabel">Connection problem</h4>
+            </div>
+            <div class="modal-body">
+                Connection to the server has been lost.
+                There are several possible reasons:
+                <ul>
+                    <li>Your internet connection is not working</li>
+					<li>Diagram editor encountered an unrecoverable error and disconnected</li>
+                    <li>Our server is having a problem or temporary down</li>
+                </ul>
+                If your have any unsaved changes you could try to reconnect and save it.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" disabled="disabled">Reconnect</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button th:fragment="reconnect-button" id="reconnectButton" type="button" class="btn btn-primary" style="display: none;">
+    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> reconnect
+</button>
+
+</body>
+</html>

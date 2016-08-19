@@ -1,0 +1,25 @@
+@mixin display-flex {
+  display: -webkit-flex; /* safari 8 */
+  display: flex;
+}
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction; /* safari 8 */
+  flex-direction: $direction;
+}
+@mixin flex-wrap($wrap) {
+  -webkit-flex-wrap: $wrap; /* safari 8 */
+  flex-wrap: $wrap;
+}
+@mixin flex-grow($grow) {
+  -webkit-flex-grow: $grow; /* safari 8 */
+  flex-grow: $grow;
+}
+@mixin flex-shrink($shrink) {
+  -webkit-flex-shrink: $shrink;
+  flex-shrink: $shrink;
+}
+@mixin user-select-none {
+  /* unselectable */
+  -webkit-user-select: none;
+  user-select: none;
+}

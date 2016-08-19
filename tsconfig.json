@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "jsx": "react"
+    },
+    "filesGlob": [
+        "./src/main/ts/**/*.ts",
+        "./src/main/ts/**/*.tsx",
+        "./typings/main.d.ts",
+        "./typings/local.d.ts",
+        "!./typings/*/**/*.d.ts",
+        "!./node_modules/**/*.ts"
+    ],
+    "files": [    
+        "./src/main/ts/is-app/imessaging.ts",
+        "./src/main/ts/is-app/isc-data-provider.ts",
+        "./src/main/ts/is-app/isc-diagram-editor.ts",
+        "./src/main/ts/is-app/isc-messaging.ts",
+        "./src/main/ts/is-app/isc-middle-model.ts",
+        "./src/main/ts/is-app/isc-title-map.ts",
+        "./src/main/ts/views/editor/isc-controller.ts",
+           
+        "./src/main/ts/entry-points/isc-editor.ts",
+
+        "./src/main/ts/views/editor/isc-controller.ts",
+
+        "./src/main/ts/views/common/imageWithPlaceholder.tsx",
+
+        "./typings/main.d.ts",
+        "./typings/local.d.ts"
+    ],
+    "compileOnSave": false,
+    "atom": {
+        "rewriteTsconfig": true
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "jsx": "react"
+    },
+    "filesGlob": [
+        "./src/main/ts/**/*.ts",
+        "./src/main/ts/**/*.tsx",
+        "./typings/main.d.ts",
+        "./typings/local.d.ts",
+        "!./typings/*/**/*.d.ts",
+        "!./node_modules/**/*.ts"
+    ],
+    "files": [
+        "./src/ontodia/data/model.d.ts",
+        "./src/ontodia/data/provider.ts",
+        "./src/ontodia/diagram/elements.ts",
+        "./src/ontodia/diagram/elementViews.ts",
+        "./src/ontodia/diagram/model.ts",
+        "./src/ontodia/diagram/view.ts",
+        "./src/ontodia/resizable-items.ts",
+        "./src/ontodia/resizable-panels.ts",
+        "./src/ontodia/viewUtils/collectionView.ts",
+        "./src/ontodia/viewUtils/paperArea.ts",
+        "./src/ontodia/viewUtils/printPaper.ts",
+        "./src/ontodia/viewUtils/toSvg.ts",
+        "./src/ontodia/widgets/classTree.ts",
+        "./src/ontodia/widgets/filter.ts",
+        "./src/ontodia/widgets/filterModel.ts",
+        "./src/ontodia/widgets/linksToolbox.ts",
+        "./src/ontodia/widgets/linksToolboxModel.ts",
+        "./src/ontodia/widgets/toolbar.tsx",
+        "./src/ontodia/tutorial/tutorial.ts",
+        "./src/ontodia/ontodia-workspace-component.tsx",
+//        "./src/ontodia/ontodia-workspace.ts",
+        "./src/svgui/indicator.ts",
+        "./src/svgui/svgui.ts",
+        "./index.ts",
+        "./typings/main.d.ts",
+        "./typings/local.d.ts"
+    ],
+    "compileOnSave": false,
+    "atom": {
+        "rewriteTsconfig": true
+    }
+}

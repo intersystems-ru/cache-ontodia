@@ -1,0 +1,25 @@
+@import "../base";
+
+.dataSource {
+  padding: 10px 10px;
+  border-bottom: 1px solid lightgray;
+  &:hover .dataSource__buttons {
+    display: block;
+  }
+}
+
+.dataSource__buttons {
+  display: none;
+  float: right;
+  margin-left: -150px;
+}
+
+.dataSource--highlighted {
+  background-color: #FFF2DC;
+}
+
+.dataSource__ownerLabel {
+  color: gray;
+  margin-left: 10px;
+  font-size: smaller;
+}

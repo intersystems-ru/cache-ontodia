@@ -11,8 +11,8 @@ var devServer = {
     quiet: false,
     stats: { colors: true },
     proxy: {
-        '/intersystemsapi/*': {
-            target: 'http://localhost:57772',//'http://198.211.125.30:57772',
+        '/intersystemsapi': {
+            target: 'http://localhost:57772/intersystemsapi',//'http://198.211.125.30:57772',
             rewrite: function (req){
                 // console.log('1. ' + req.url);
                 // req.url = 'http://198.211.125.30:57772' + req.url.substring('/intersystemsapi/'.length-1, req.url.length);

@@ -28,7 +28,7 @@ export default class ISTitleMap {
         var self = this;
         $.ajax({
           type: "GET",
-          url: self.serviceUrl + 'ClassExplorer/GetClassTree?namespace=' + self.namespace,
+          url: self.serviceUrl + 'intersystemsapi/GetClassTree?namespace=' + self.namespace,
           headers: self.headers,
           success: callback,
           error: callback
@@ -38,10 +38,10 @@ export default class ISTitleMap {
     private getPriorityList():string[]{
         return ["Name",
                 "Title", 
-                "FirstName", 
-                "LastName", 
-                "Model", 
-                "Serial", 
+                "FirstName",
+                "LastName",
+                "Model",
+                "Serial",
                 "Identifier"];
     }
     

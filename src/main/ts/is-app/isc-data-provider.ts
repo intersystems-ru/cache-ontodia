@@ -86,7 +86,7 @@ export class ISCacheDataProvider implements DataProvider {
             offset: params.offset,
             languageCode: params.languageCode,
         }).then(response => {
-            return response.elements
+            return response.elements;
         });
     }
 }

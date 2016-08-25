@@ -764,7 +764,7 @@ export default class MiddleModel {
       let self = this;
       $.ajax({
         type: 'GET',
-        url: this.serviceUrl + 'ClassExplorer/GetClassTree?namespace=' + self.namespace,
+        url: this.serviceUrl + 'intersystemsapi/GetClassTree?namespace=' + self.namespace,
         headers: self.headers,
         success: function(data:any) {
             self.calculateElementsAndTypes(request, data);
@@ -855,7 +855,7 @@ export default class MiddleModel {
         $.ajax({
           type: 'GET',
           url: this.serviceUrl +
-               'ClassExplorer/GetArbitraryView?list=' +
+               'intersystemsapi/GetArbitraryView?list=' +
                list + '&level=null&namespace=' + self.namespace,
           headers: self.headers,
           success: onSuccess,
@@ -868,7 +868,7 @@ export default class MiddleModel {
         $.ajax({
           type: 'GET',
           url: this.serviceUrl +
-               'ClassExplorer/details/GetClassInstances/' +
+               'intersystemsapi/details/GetClassInstances/' +
                classId + '?sortByField=ID&namespace=' + self.namespace,
           headers: self.headers,
           success: onSuccess
@@ -879,7 +879,7 @@ export default class MiddleModel {
        let self = this;
         $.ajax({
           type: 'GET',
-          url: this.serviceUrl + 'ClassExplorer/details/GetInstance/' +
+          url: this.serviceUrl + 'intersystemsapi/details/GetInstance/' +
                instId + '?className=' + classId + '&sortByField=ID&namespace=' + self.namespace,
           headers: self.headers,
           success: onSuccess
